@@ -23,7 +23,6 @@ export class GameScene extends Phaser.Scene {
     this.load.audio('success', 'sounds/success.mp3');
     this.load.audio('timeout', 'sounds/timeout.mp3');
     this.load.audio('card', 'sounds/card.mp3');
-    console.log('preload');
   }
 
   create () {
@@ -33,7 +32,6 @@ export class GameScene extends Phaser.Scene {
     this.createText();
     this.createSounds();
     this.start();
-    console.log('create');
   }
 
   start () {
@@ -56,34 +54,34 @@ export class GameScene extends Phaser.Scene {
     };
     const maxDelay = this.cards.length * this.config.cardDelay;
     // Когда все карты улетели
-    this.cards.forEach(card => {
-      card.depth = maxDelay - card.position.delay;
-      card.move({
-        x: this.game.canvas.width + card.width,
-        y: this.game.canvas.height + card.height,
-        delay: card.position.delay,
+    for (let i = 0, length = this.cards.length; i < length; i++) {
+      this.cards[i].depth = maxDelay - this.cards[i].position.delay;
+      this.cards[i].move({
+        x: this.game.canvas.width + this.cards[i].width,
+        y: this.game.canvas.height + this.cards[i].height,
+        delay: this.cards[i].position.delay,
         callback: onCardMoveComplete,
       });
-    });
+    }
   }
 
   initCards () {
-    const positions = Phaser.Utils.Array.Shuffle(this.positions);
-
-    this.cards.forEach(card => {
-      card.init(positions.pop());
-    });
+    const positions = this.positions.slice();
+    Phaser.Utils.Array.Shuffle(positions);
+    for (let i = 0, length = this.cards.length; i < length; i++) {
+      this.cards[i].init(positions.pop());
+    }
   }
 
   showCards () {
-    this.cards.forEach(card => {
-      card.depth = card.position.delay;
-      card.move({
-        x: card.position.x,
-        y: card.position.y,
-        delay: card.position.delay,
+    for (let i = 0, length = this.cards.length; i < length; i++) {
+      this.cards[i].depth = this.cards[i].position.delay;
+      this.cards[i].move({
+        x: this.cards[i].position.x,
+        y: this.cards[i].position.y,
+        delay: this.cards[i].position.delay,
       });
-    });
+    }
   }
 
   createBackground () {

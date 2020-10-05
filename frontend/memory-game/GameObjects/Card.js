@@ -27,7 +27,6 @@ export class Card extends Phaser.GameObjects.Sprite {
       delay: params.delay,
       targets: this,
       onComplete: () => {
-        //this.setPosition(params.x, params.y);
         if (params.callback) {
           params.callback();
         }
