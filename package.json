@@ -8,11 +8,12 @@
     "npm": "6.14.8"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=. webpack -p && cross-env NODE_PATH=. node index",
+    "start": "cross-env NODE_PATH=. node index",
     "server": "cross-env NODE_PATH=. nodemon index",
     "test": "eslint .",
     "frontend:prod": "cross-env NODE_PATH=. webpack -p",
-    "frontend:dev": "cross-env NODE_PATH=. webpack --debug --display-error-details --watch"
+    "frontend:dev": "cross-env NODE_PATH=. webpack --debug --display-error-details --watch",
+    "heroku-postbuild": "npm run frontend:prod"
   },
   "nodemonConfig": {
     "ignore": [
