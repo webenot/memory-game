@@ -1,0 +1,33 @@
+@import "mixins/mixins"
+
+*
+  box-sizing: border-box
+
+html, body
+  padding: 0
+  margin: 0
+  background-color: #52D1C2
+  width: 100%
+  height: 100%
+
+#memory
+  width: 100%
+  height: 100%
+  +margin(auto)
+  +display-flex()
+  +flex-direction(column)
+  +align-items(center)
+  +justify-content(center)
+
+canvas
+  width: 100%
+  max-width: 1280px
+
+@font-face
+  font-family: "CurseCasual"
+  src: url("../fonts/CurseCasual.ttf") format("truetype")
+
+.fontPreload
+  font-family: "CurseCasual", sans-serif
+  position: absolute
+  left: - 100px

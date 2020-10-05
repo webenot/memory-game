@@ -1,0 +1,62 @@
+@mixin margin($properties)
+  $is-null: false
+  $margin-top: ()
+  $margin-bottom: ()
+  $margin-left: ()
+  $margin-right: ()
+  $margin: ()
+  $index: 1
+  $length: length($properties)
+  @each $property in $properties
+    @if $property == null
+      $is-null: true
+    @if $index == 1 and $property != null
+      $margin-top: $property
+    @if $index == 2 and $property != null
+      $margin-right: $property
+    @if $index == 3 and $property != null
+      $margin-bottom: $property
+    @if $index == 4 and $property != null
+      $margin-left: $property
+    $index: $index + 1
+
+  @if $length == 1
+    margin: $properties
+  @else if $length == 2
+    @if $is-null
+      @if $margin-top
+        margin-top: $margin-top
+        margin-bottom: $margin-top
+      @if $margin-right
+        margin-left: $margin-right
+        margin-right: $margin-right
+    @else
+      margin: $properties
+  @else
+    @if $is-null
+      @if $margin-top
+        margin-top: $margin-top
+      @if $margin-bottom
+        margin-bottom: $margin-bottom
+      @if $margin-left
+        margin-left: $margin-left
+      @if $margin-right
+        margin-right: $margin-right
+    @else
+      @if $margin-top and $margin-right and $margin-bottom and $margin-left
+        @if $margin-top == $margin-bottom and $margin-right == $margin-left
+          $margin: join($margin-top, $margin-right)
+        @else
+          $margin: $properties
+        margin: $margin
+      @else
+        $margin: ()
+        @if $margin-top
+          $margin: append($margin, $margin-top)
+        @if $margin-bottom
+          $margin: append($margin, $margin-bottom)
+        @if $margin-left
+          $margin: append($margin, $margin-left)
+        @if $margin-right
+          $margin: append($margin, $margin-right)
+        margin: $margin

@@ -1,0 +1,4 @@
+.idea/
+node_modules/
+applications/*/public/
+applications/*/views/

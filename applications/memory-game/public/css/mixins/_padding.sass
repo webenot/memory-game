@@ -1,0 +1,62 @@
+@mixin padding($properties)
+  $is-null: false
+  $padding-top: ()
+  $padding-bottom: ()
+  $padding-left: ()
+  $padding-right: ()
+  $padding: ()
+  $index: 1
+  $length: length($properties)
+  @each $property in $properties
+    @if $property == null
+      $is-null: true
+    @if $index == 1 and $property != null
+      $padding-top: $property
+    @if $index == 2 and $property != null
+      $padding-right: $property
+    @if $index == 3 and $property != null
+      $padding-bottom: $property
+    @if $index == 4 and $property != null
+      $padding-left: $property
+    $index: $index + 1
+
+  @if $length == 1
+    padding: $properties
+  @else if $length == 2
+    @if $is-null
+      @if $padding-top
+        padding-top: $padding-top
+        padding-bottom: $padding-top
+      @if $padding-right
+        padding-left: $padding-right
+        padding-right: $padding-right
+    @else
+      padding: $properties
+  @else
+    @if $is-null
+      @if $padding-top
+        padding-top: $padding-top
+      @if $padding-bottom
+        padding-bottom: $padding-bottom
+      @if $padding-left
+        padding-left: $padding-left
+      @if $padding-right
+        padding-right: $padding-right
+    @else
+      @if $padding-top and $padding-right and $padding-bottom and $padding-left
+        @if $padding-top == $padding-bottom and $padding-right == $padding-left
+          $padding: join($padding-top, $padding-right)
+        @else
+          $padding: $properties
+        padding: $padding
+      @else
+        $padding: ()
+        @if $padding-top
+          $padding: append($padding, $padding-top)
+        @if $padding-bottom
+          $padding: append($padding, $padding-bottom)
+        @if $padding-left
+          $padding: append($padding, $padding-left)
+        @if $padding-right
+          $padding: append($padding, $padding-right)
+        padding: $padding
