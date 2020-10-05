@@ -12,26 +12,21 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const Cleanplugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 
 const webpackConfig = {
-  // Режим
-  mode: (isProduction) ? 'production' : 'development',
+  mode: process.env.NODE_ENV,
 
   optimization: {
     minimizer: [ new TerserJSPlugin({}) ],
     usedExports: true,
   },
 
-  // слежение
   watch: !isProduction,
 
   devtool: isProduction ? false : 'inline-source-map',
 
-  // Базовый путь к проекту
   context: path.resolve(__dirname, 'frontend', process.env.CURRENT_APP),
 
-  // Точки входа JS
   entry: projectConfig.entry,
   resolve: projectConfig.resolve,
-  // Путь для собранных файлов
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'applications', process.env.CURRENT_APP, 'public', 'js'),
