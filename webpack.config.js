@@ -23,7 +23,7 @@ const webpackConfig = {
   // слежение
   watch: !isProduction,
 
-  devtool: (isProduction) ? false : 'inline-source-map',
+  devtool: isProduction ? false : 'inline-source-map',
 
   // Базовый путь к проекту
   context: path.resolve(__dirname, 'frontend', process.env.CURRENT_APP),
@@ -46,6 +46,8 @@ const webpackConfig = {
       cleanStaleWebpackAssets: false,
     }),
   ],
+
+  performance: projectConfig.performance,
 };
 
 if (projectConfig.module.rules) {

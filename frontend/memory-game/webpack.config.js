@@ -26,4 +26,9 @@ module.exports = {
     ],
   },
   resolve: { extensions: [ '.js' ] },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 5000000,
+    maxAssetSize: 5000000,
+  },
 };
