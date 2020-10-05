@@ -33,7 +33,7 @@ const webpackConfig = {
   resolve: projectConfig.resolve,
   // Путь для собранных файлов
   output: {
-    filename: isProduction ? '[name].[hash:8].js' : '[name].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'applications', process.env.CURRENT_APP, 'public', 'js'),
     publicPath: '.',
   },
