@@ -13,7 +13,7 @@
     "test": "eslint .",
     "frontend:prod": "cross-env NODE_PATH=. webpack -p",
     "frontend:dev": "cross-env NODE_PATH=. webpack --debug --display-error-details --watch",
-    "heroku-postbuild": "npm run frontend:prod"
+    "heroku-prebuild": "npm run frontend:prod"
   },
   "nodemonConfig": {
     "ignore": [
